@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/listings">
+      <h4>Locatify</h4>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <!-- <a class="nav-link" href="/">Home</a> -->
+          <a class="nav-link" href="/listings">All Listings </a>
+                  
+        </div>
+        
+        <!-- Search Bar -->
+        <div class="search-container">
+          <form class="search-form" action="/listings" method="GET">
+            <div class="search-input-group">
+              <input type="text" class="search-input" name="search" placeholder="Where are you going?" value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>" id="searchInput" autocomplete="off">
+              <button type="submit" class="search-btn">
+                <i class="fas fa-search"></i>
+                <span>Search</span>
+              </button>
+            </div>
+            <!-- Search Suggestions -->
+            <div class="search-suggestions" id="searchSuggestions">
+              <div class="suggestion-item" data-search="Mumbai">Mumbai, Maharashtra</div>
+              <div class="suggestion-item" data-search="Delhi">Delhi, NCR</div>
+              <div class="suggestion-item" data-search="Bangalore">Bangalore, Karnataka</div>
+              <div class="suggestion-item" data-search="Goa">Goa</div>
+              <div class="suggestion-item" data-search="Kerala">Kerala</div>
+              <div class="suggestion-item" data-search="Rajasthan">Rajasthan</div>
+              <div class="suggestion-item" data-search="Himachal">Himachal Pradesh</div>
+              <div class="suggestion-item" data-search="Kashmir">Kashmir</div>
+            </div>
+          </form>
+        </div>
+        
+        <div class="navbar-nav ms-auto d-flex align-items-center">
+          <a class="nav-link" href="/listings/new">Airbnb your home</a> 
+          <% if (!currentUser) { %>
+            <div class="nav-buttons">
+              <a class="btn btn-outline-dark btn-sm me-2" href="/login">Log in</a>
+              <a class="btn btn-dark btn-sm" href="/signup">Sign up</a>
+            </div>
+          <% } else { %>
+            <div class="dropdown">
+              <button class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user-circle me-1"></i>
+                <%= currentUser.username %>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="/listings/new"><i class="fas fa-plus me-2"></i>Create Listing</a></li>
+                <li><a class="dropdown-item" href="/listings/wishlist"><i class="fas fa-heart me-2"></i>Wishlist</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt me-2"></i>Log out</a></li>
+              </ul>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </nav>

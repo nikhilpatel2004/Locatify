@@ -1,0 +1,131 @@
+<% layout("layouts/boilerplate") %>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+ 
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <br /><br />
+    <h3 class="mb-4">Edit your Listing</h3>
+
+    <form
+      method="POST"
+      action="/listings/<%= listing._id %>?_method=PUT"
+      novalidate
+      enctype="multipart/form-data"
+      class="needs-validation"
+    >
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          id="title"
+          name="listing[title]"
+          value="<%= listing.title %>"
+          type="text"
+          class="form-control"
+          required
+        />
+        <div class="invalid-feedback">Title is required.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          id="description"
+          name="listing[description]"
+          class="form-control"
+          required
+        >
+<%= listing.description %></textarea
+        >
+        <div class="invalid-feedback">Description is required.</div>
+      </div>
+
+      <div class="mb-3">
+        Original Image Preview: <br>
+        <img src="<%= originalImageUrl %>" alt="Original Listing Image" width="150">
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload New Image</label>
+        <input
+          id="image"
+          name="listing[image][url]"
+          type="file"
+          class="form-control"
+        />
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="price" class="form-label">Price</label>
+          <input
+            id="price"
+            name="listing[price]"
+            value="<%= listing.price %>"
+            type="number"
+            min="1"
+            step="1"
+            title="Price should be a positive number only"
+            required
+            class="form-control"
+          />
+          <div class="invalid-feedback">
+            Price should be a positive number only (no text allowed).
+          </div>
+        </div>
+
+        <div class="mb-3 col-md-8">
+          <label for="country" class="form-label">Country</label>
+          <input
+            id="country"
+            name="listing[country]"
+            value="<%= listing.country %>"
+            type="text"
+            pattern="[a-zA-Z\s]+"
+            title="Country name should contain only letters and spaces"
+            required
+            class="form-control"
+          />
+          <div class="invalid-feedback">
+            Country should contain only letters and spaces.
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="location" class="form-label">Location</label>
+        <input
+          id="location"
+          name="listing[location]"
+          value="<%= listing.location %>"
+          type="text"
+          pattern="[a-zA-Z\s,]+"
+          title="Location should contain only letters, spaces and commas"
+          required
+          class="form-control"
+        />
+        <div class="invalid-feedback">
+          Location should contain only letters, spaces and commas.
+        </div>
+      </div>
+
+      <button class="btn btn-dark btn-lg edit-btn mt-3">Edit</button>
+      <br /><br />
+    </form>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-8 offset-md-2">
+    <h4>Listing Location</h4>
+    <div id="map" style="height: 400px; width: 100%; border-radius: 10px;"></div>
+  </div>
+</div>
+
+<script>
+  // Pass listing data from EJS to a global JavaScript variable
+  const mapToken = "<%= mapboxToken %>";
+  const listing = <%- JSON.stringify(listing) %>;
+</script>
+
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+<script src="/js/map-picker.js"></script>

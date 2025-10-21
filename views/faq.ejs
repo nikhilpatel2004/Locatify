@@ -1,0 +1,69 @@
+<% layout("./layouts/boilerplate") %>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <h1 class="mb-4">Frequently Asked Questions (FAQ)</h1>
+
+            <div class="accordion" id="faqAccordion">
+
+                <!-- Question 1: How do I create an account? -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            How do I create an account?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            You can create an account by clicking the "Sign up" button on the top right corner of the homepage. You will need to provide a username, a valid email address, and a password. After signing up, you will be automatically logged in.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 2: How do I create a new listing? -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            How do I create a new listing?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Once you are logged in, you can create a new listing by clicking on the "Airbnb your home" link in the navigation bar. You will need to fill out a form with details about your property, including title, description, price, location, and an image.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 3: How does the map feature work? -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            How does the map feature work?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Our maps are powered by OpenStreetMap, a free and open-source mapping service. When you create a listing, we automatically convert your provided location into geographic coordinates. This allows us to display a map on your listing's page showing its location with a marker. For listings without a specified location, a default map of India is shown.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 4: How can I edit or delete my listing? -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            How can I edit or delete my listing?
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            You can only edit or delete listings that you own. Navigate to your listing's page, and you will see "Edit" and "Delete" buttons. Click on them to modify or remove your listing.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
