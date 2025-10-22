@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: locatify
+    env: node
+    region: oregon
+    branch: main
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: ATLASDB_URL
+      - key: SECRET
+      - key: CLOUD_NAME
+      - key: CLOUD_API_KEY
+      - key: CLOUD_API_SECRET
+      - key: EMAIL_USER
+      - key: EMAIL_PASS
+      - key: MAPBOX_TOKEN
