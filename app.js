@@ -60,7 +60,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true, limit: "100mb" }));
 app.use(express.json({ limit: "100mb" }));
 app.use(methodOverride("_method"));
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.resolve(__dirname, "public")));
 
 // Debug: log where static files are served from
 console.log('Serving static files from:', path.join(__dirname, 'public'));
