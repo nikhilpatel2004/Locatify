@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # 🏠 Locatify - Airbnb Clone
 
 A full-stack web application that allows users to discover, book, and manage vacation rentals. Built with Node.js, Express, MongoDB, and modern web technologies.
