@@ -17,3 +17,4 @@ services:
       - key: EMAIL_USER
       - key: EMAIL_PASS
       - key: MAPBOX_TOKEN
+      - key: GOOGLE_MAPS_API_KEY
