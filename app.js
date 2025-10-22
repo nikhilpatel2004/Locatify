@@ -29,7 +29,8 @@ const flash = require("connect-flash");
 // --------------------
 const dbUrl = process.env.ATLASDB_URL;
 
-// Connect to MongoDB and only start the server after success
+// Connect to MongoDB. For debugging (and to let Render serve static assets)
+// we log DB errors but still start the server so you can verify assets.
 async function main() {
   await mongoose.connect(dbUrl);
 }
@@ -37,16 +38,16 @@ async function main() {
 main()
   .then(() => {
     console.log("✅ Connected to MongoDB Atlas");
-    // Start the server only after DB connection is established
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB connection error (continuing to start server for debug):", err);
+    // NOTE: not exiting here so the process stays up and static assets can be served.
+  })
+  .finally(() => {
     const PORT = process.env.PORT || 8080;
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
     });
-  })
-  .catch((err) => {
-    console.error("❌ MongoDB connection error:", err);
-    // Exit process because app can't function without DB
-    process.exit(1);
   });
 
 // --------------------
@@ -60,6 +61,9 @@ app.use(express.urlencoded({ extended: true, limit: "100mb" }));
 app.use(express.json({ limit: "100mb" }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
+
+// Debug: log where static files are served from
+console.log('Serving static files from:', path.join(__dirname, 'public'));
 
 // --------------------
 // ✅ Session Configuration
