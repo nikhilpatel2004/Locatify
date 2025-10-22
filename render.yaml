@@ -2,6 +2,7 @@ services:
   - type: web
     name: locatify
     env: node
+    nodeRuntime: 20.x
     region: oregon
     branch: main
     plan: free
