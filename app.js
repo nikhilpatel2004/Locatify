@@ -29,13 +29,25 @@ const flash = require("connect-flash");
 // --------------------
 const dbUrl = process.env.ATLASDB_URL;
 
-main()
-  .then(() => console.log("✅ Connected to MongoDB Atlas"))
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
-
+// Connect to MongoDB and only start the server after success
 async function main() {
   await mongoose.connect(dbUrl);
 }
+
+main()
+  .then(() => {
+    console.log("✅ Connected to MongoDB Atlas");
+    // Start the server only after DB connection is established
+    const PORT = process.env.PORT || 8080;
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB connection error:", err);
+    // Exit process because app can't function without DB
+    process.exit(1);
+  });
 
 // --------------------
 // ✅ Express App Setup
@@ -150,14 +162,11 @@ app.use("/", userRouter);
 app.all(/.*/, (req, res, next) => next(new ExpressError("Page Not Found!", 404)));
 
 app.use((err, req, res, next) => {
+  // If headers are already sent, delegate to default Express error handler
+  if (res.headersSent) {
+    return next(err);
+  }
   const { statusCode = 500, message = "Something went wrong!" } = err;
   res.status(statusCode).render("error.ejs", { message, statusCode });
 });
-
-// --------------------
-// ✅ Server Start
-// --------------------
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+// Note: server is started after DB connect in main().
